@@ -28,12 +28,18 @@ TCaracteristicas * Caracteristicas;
 
 void CargarDatos(struct TDatos *datos);
 void MostrarDatos(struct TDatos *datos);
+void cargar_stats(struct TPersonaje *pj);
+void mostrar_stats(struct TPersonaje *pj);
 int main(){
    struct TDatos datos;
    struct TDatos *p_datos=&datos;
    srand(time(NULL));
+   struct TPersonaje *pj = (struct TPersonaje*)malloc(sizeof(struct TPersonaje));
+   pj->Caracteristicas = (struct TCaracteristicas*)malloc(sizeof(struct TCaracteristicas));
    CargarDatos(p_datos);
    MostrarDatos(p_datos);
+   cargar_stats(pj);
+   mostrar_stats(pj);
    return 0;
 }
 
@@ -74,4 +80,19 @@ void MostrarDatos(struct TDatos *p_datos){
    printf("Edad: %d",p_datos->edad);
 
    printf("\nSalud: %.3f",p_datos->Salud);
+}
+void cargar_stats(struct TPersonaje *pj){	
+	pj->Caracteristicas->velocidad=(rand()%(10-1+1))+1;
+	pj->Caracteristicas->destreza=(rand()%(5-1+1))+1;
+	pj->Caracteristicas->fuerza=(rand()%(10-1+1))+1;
+	pj->Caracteristicas->Nivel=(rand()%(10-1+1))+1;
+	pj->Caracteristicas->Armadura=(rand()%(10-1+1))+1;
+}
+void mostrar_stats(struct TPersonaje *pj){
+	printf("\n\n   ||Caracteristicas del personaje||\n\n");
+	printf("Nivel: %d\n",pj->Caracteristicas->Nivel);
+	printf("Fuerza: %d\n",pj->Caracteristicas->fuerza);
+	printf("Destreza: %d\n",pj->Caracteristicas->destreza);
+	printf("Velocidad: %d\n",pj->Caracteristicas->velocidad);
+	printf("Armadura: %d\n",pj->Caracteristicas->Armadura);
 }
